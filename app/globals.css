@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+body {
+  /* max-width: 95%; */
+  /* margin: 8px; */
+  background: #f4f4f4;
+}
