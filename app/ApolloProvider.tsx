@@ -4,8 +4,6 @@
 import { ApolloProvider, gql } from "@apollo/client";
 import client from "./client";
 
-// const client = ...
-
 export default function ApolloWrapper({
   children,
 }: {
