@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ProductsList from "../ProductsList";
 import { useGQL } from "@/app/hooks/useGQL";
+import Loader from "../Loader";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -13,6 +14,10 @@ const Products = () => {
       setProducts(data.products);
     }
   });
+
+  if (loading) return <Loader />;
+  if (error) return <p>Error: {error.message}</p>;
+
   return (
     <div className="w-[95%] mx-auto mt-4 grid [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))] gap-4">
       <ProductsList productsArray={products} />

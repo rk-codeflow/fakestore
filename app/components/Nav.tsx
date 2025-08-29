@@ -1,13 +1,14 @@
 import React from "react";
 import Sun from "./icons/Sun";
 import Cart from "./icons/Cart";
+import CartModal from "./CartModal";
 
 const Nav = () => {
   return (
     <>
       <div className="flex items-center justify-between w-[95%] mx-auto mt-4">
         <a href="#">
-          <h1 className="text-sm sm:text-xl md:text-2xl lg:text-4xl">
+          <h1 className="text-sm sm:text-xl md:text-2xl lg:text-4xl font-semibold text-pink-500">
             FakeStore
           </h1>
         </a>
@@ -40,6 +41,11 @@ const Nav = () => {
 
       <div className="mt-3 sm:mt-5 md:mt-7">
         <hr className="text-gray-300" />
+      </div>
+
+      {/* modal content here */}
+      <div className="grid place-items-center">
+        <CartModal />
       </div>
     </>
   );

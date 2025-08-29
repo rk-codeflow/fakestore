@@ -24,6 +24,22 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "placeimg.com",
       },
+      {
+        protocol: "https",
+        hostname: "basicjeans.co",
+      },
+      {
+        protocol: "https",
+        hostname: "basicjeans.co",
+      },
+      {
+        protocol: "https",
+        hostname: "placeimg.co",
+      },
+      {
+        protocol: "https",
+        hostname: "pravatar.cc",
+      },
     ],
   },
 };
