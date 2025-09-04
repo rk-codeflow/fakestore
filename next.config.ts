@@ -40,6 +40,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "pravatar.cc",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
   },
 };
