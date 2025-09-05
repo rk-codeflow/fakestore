@@ -1,9 +1,12 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Sun from "./icons/Sun";
 import Cart from "./icons/Cart";
 import CartModal from "./CartModal";
 
 const Nav = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
     <>
       <div className="flex items-center justify-between w-[95%] mx-auto mt-4">
@@ -33,7 +36,12 @@ const Nav = () => {
           <a href="#">
             <Sun />
           </a>
-          <a href="#">
+          <a
+            href="#"
+            onClick={(prev) => {
+              setIsCartOpen(!isCartOpen);
+            }}
+          >
             <Cart />
           </a>
         </div>
@@ -45,7 +53,10 @@ const Nav = () => {
 
       {/* modal content here */}
       <div className="grid place-items-center">
-        <CartModal />
+        <CartModal
+          isOpen={!isCartOpen}
+          toggleModal={() => setIsCartOpen(!isCartOpen)}
+        />
       </div>
     </>
   );
