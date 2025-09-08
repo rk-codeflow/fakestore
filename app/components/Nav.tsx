@@ -2,11 +2,12 @@
 import React, { useState } from "react";
 import Sun from "./icons/Sun";
 import Cart from "./icons/Cart";
-import CartModal from "./CartModal";
 
-const Nav = () => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
+interface NavProps {
+  onCartClick: () => void;
+}
+const Nav = ({ onCartClick }: NavProps) => {
+  console.log({ onCartClick });
   return (
     <>
       <div className="flex items-center justify-between w-[95%] mx-auto mt-4">
@@ -36,27 +37,14 @@ const Nav = () => {
           <a href="#">
             <Sun />
           </a>
-          <a
-            href="#"
-            onClick={(prev) => {
-              setIsCartOpen(!isCartOpen);
-            }}
-          >
+          <div className="cursor-pointer" onClick={onCartClick}>
             <Cart />
-          </a>
+          </div>
         </div>
       </div>
 
       <div className="mt-3 sm:mt-5 md:mt-7">
         <hr className="text-gray-300" />
-      </div>
-
-      {/* modal content here */}
-      <div className="grid place-items-center">
-        <CartModal
-          isOpen={!isCartOpen}
-          toggleModal={() => setIsCartOpen(!isCartOpen)}
-        />
       </div>
     </>
   );

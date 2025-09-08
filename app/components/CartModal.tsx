@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Edit from "./icons/Edit";
 import Delete from "./icons/Delete";
 
 interface CartModalProps {
-  isOpen: boolean;
-  toggleModal: () => void;
+  open: boolean;
+  onClose: () => void;
 }
 
 const items = [
@@ -60,11 +60,23 @@ const items = [
   },
 ];
 
-const CartModal = ({ isOpen, toggleModal }: CartModalProps) => {
-  if (isOpen) return null;
+const CartModal = ({ open, onClose }: CartModalProps) => {
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  if (!open) return null;
   return (
     <div className="fixed inset-0 z-40 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/20" onClick={toggleModal}>
+      <div className="absolute inset-0 bg-black/20" onClick={onClose}>
         <div
           className="mx-auto h-96 overflow-y-auto  w-2/5 min-w-[40%] max-w-[500px] rounded-lg shadow-lg z-50 bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           role="dialog"
