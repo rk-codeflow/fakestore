@@ -1,12 +1,13 @@
 import { ProductProps } from "@/app/interface";
-import React, { useState } from "react";
+import { useCartStore } from "@/app/store/cartStore";
+import React from "react";
 
 interface ProductsDataProps {
   productsArray: ProductProps[];
-  addToCart: (item: ProductProps) => void;
 }
 
-const ProductsList = ({ productsArray, addToCart }: ProductsDataProps) => {
+const ProductsList = ({ productsArray }: ProductsDataProps) => {
+  const addToCart = useCartStore((state) => state.addToCart);
   return (
     <>
       {productsArray.map((item) => {

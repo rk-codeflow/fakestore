@@ -2,68 +2,15 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import Edit from "./icons/Edit";
 import Delete from "./icons/Delete";
-import { ProductProps } from "../interface";
+import { useCartStore } from "../store/cartStore";
 
 interface CartModalProps {
   open: boolean;
   onClose: () => void;
-  cartItems: ProductProps[];
 }
 
-// const items = [
-//   {
-//     id: 1,
-//     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
-//     title: "Wireless Bluetooth Headphones",
-//     price: 79.99,
-//   },
-//   {
-//     id: 2,
-//     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-//     title: "Smart Fitness Watch",
-//     price: 149.95,
-//   },
-//   {
-//     id: 3,
-//     image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
-//     title: "Premium Coffee Maker",
-//     price: 89.5,
-//   },
-
-//   {
-//     id: 4,
-//     image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
-//     title: "Minimalist Leather Backpack",
-//     price: 124.99,
-//   },
-//   {
-//     id: 5,
-//     image: "https://images.unsplash.com/photo-1585155770447-2f66e2a397b5",
-//     title: "Modern Desk Lamp",
-//     price: 58.75,
-//   },
-//   {
-//     id: 6,
-//     image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12",
-//     title: "Waterproof Wireless Speaker",
-//     price: 89.99,
-//   },
-//   {
-//     id: 7,
-//     image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1",
-//     title: "Ergonomic Office Chair",
-//     price: 249.95,
-//   },
-//   {
-//     id: 8,
-//     image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb",
-//     title: "Gaming Mechanical Keyboard",
-//     price: 95.5,
-//   },
-// ];
-
-const CartModal = ({ open, onClose, cartItems }: CartModalProps) => {
-  console.log({ cartItems });
+const CartModal = ({ open, onClose }: CartModalProps) => {
+  const cartItems = useCartStore((state) => state.cartItems);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";

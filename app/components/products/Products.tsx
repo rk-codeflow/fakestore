@@ -4,7 +4,7 @@ import ProductsList from "./ProductsList";
 import { useGQL } from "@/app/hooks/useGQL";
 import Loader from "../Loader";
 
-const Products = ({ addToCart }: any) => {
+const Products = () => {
   const [products, setProducts] = useState([]);
   const { GET_ALL_PRODUCTS } = useGQL();
   const { loading, error, data } = GET_ALL_PRODUCTS();
@@ -20,7 +20,7 @@ const Products = ({ addToCart }: any) => {
 
   return (
     <div className="w-[95%] mx-auto mt-4 grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4">
-      <ProductsList productsArray={products} addToCart={addToCart} />
+      <ProductsList productsArray={products} />
     </div>
   );
 };
