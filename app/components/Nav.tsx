@@ -1,13 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Sun from "./icons/Sun";
 import Cart from "./icons/Cart";
+import { useCartStore } from "../store/cartStore";
 
 interface NavProps {
   onCartClick: () => void;
 }
 const Nav = ({ onCartClick }: NavProps) => {
-  console.log({ onCartClick });
+  const cartItems = useCartStore((state) => state.cartItems);
+
   return (
     <>
       <div className="flex items-center justify-between w-[95%] mx-auto mt-4">
@@ -37,8 +39,14 @@ const Nav = ({ onCartClick }: NavProps) => {
           <a href="#">
             <Sun />
           </a>
-          <div className="cursor-pointer" onClick={onCartClick}>
-            <Cart />
+          <div
+            className="cursor-pointer flex items-center"
+            onClick={onCartClick}
+          >
+            <Cart />{" "}
+            <sup className="h-5 w-5 rounded-full bg-pink-500 text-white text-xs flex items-center justify-center">
+              {cartItems.length}
+            </sup>
           </div>
         </div>
       </div>
