@@ -3,6 +3,8 @@ import Image from "next/image";
 import Edit from "./icons/Edit";
 import Delete from "./icons/Delete";
 import { useCartStore } from "../store/cartStore";
+import { useGQL } from "../hooks/useGQL";
+import { ProductProps } from "../interface";
 
 interface CartModalProps {
   open: boolean;
@@ -10,7 +12,12 @@ interface CartModalProps {
 }
 
 const CartModal = ({ open, onClose }: CartModalProps) => {
+  const { DELETE_PRODUCT_BY_ID } = useGQL();
+  const [handleDelete] = DELETE_PRODUCT_BY_ID();
+
   const cartItems = useCartStore((state) => state.cartItems);
+  const removeCartItem = useCartStore((state) => state.removeItem);
+  const total = cartItems.reduce((acc, item) => acc + item.price, 0);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -22,6 +29,21 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  // delete item
+  const deleteItem = async (id: string) => {
+    try {
+      await handleDelete({
+        variables: {
+          deleteProductId: id,
+        },
+      });
+
+      removeCartItem(id);
+    } catch (error) {
+      // console.log(error);
+    }
+  };
 
   if (!open) return null;
   return (
@@ -35,7 +57,7 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
         >
           <div className="flex items-center justify-between px-4 py-2">
             <h4 className="font-semibold text-lg">My Cart</h4>
-            <p className="font-bold text-md lg:text-2xl">$ 145</p>
+            <p className="font-bold text-md lg:text-2xl">$ {total}</p>
           </div>
 
           <hr className="border-gray-200 shadow-2xs" />
@@ -44,7 +66,7 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
             {cartItems.length === 0 ? (
               <p className="text-center">Your cart is empty</p>
             ) : (
-              cartItems.map((item: any) => (
+              cartItems.map((item: ProductProps) => (
                 <React.Fragment key={item.id}>
                   <div className="flex gap-x-2">
                     <Image
@@ -57,13 +79,21 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
                     <div className="flex justify-center flex-col gap-y-2">
                       <h4 className="font-semibold">{item.title}</h4>
                       <div className="flex gap-x-2">
-                        <a href="#">
-                          {" "}
-                          <Edit />
-                        </a>
-                        <a href="#">
+                        <div className="bg-black rounded-full text-white px-2 py-[3px] flex items-center justify-center gap-[10px] ">
+                          <button className="text-sm cursor-pointer">-</button>
+                          <span className="text-sm text-center w-4">1</span>
+                          <button className="text-sm cursor-pointer">+</button>
+                        </div>
+                        <button
+                          className="relative top-[2px]"
+                          onClick={() => {
+                            deleteItem(item.id.toString());
+                            console.log("id", item.id);
+                            console.log("cart after delete", cartItems);
+                          }}
+                        >
                           <Delete />
-                        </a>
+                        </button>
                       </div>
                     </div>
                     <p className="font-bold text-md ml-auto">${item.price}</p>

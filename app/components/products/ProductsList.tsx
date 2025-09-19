@@ -1,6 +1,7 @@
 import { ProductProps } from "@/app/interface";
 import { useCartStore } from "@/app/store/cartStore";
 import React from "react";
+import toast from "react-hot-toast";
 
 interface ProductsDataProps {
   productsArray: ProductProps[];
@@ -37,7 +38,10 @@ const ProductsList = ({ productsArray }: ProductsDataProps) => {
               <h4 className="text-lg md:text-2xl font-bold">${item.price}</h4>
               <button
                 className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded cursor-pointer"
-                onClick={() => addToCart(item)}
+                onClick={() => {
+                  addToCart(item);
+                  toast.success(`${item.title} added to cart!`);
+                }}
               >
                 Add to cart
               </button>
