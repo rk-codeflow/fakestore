@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Edit from "./icons/Edit";
 import Delete from "./icons/Delete";
 import { useCartStore } from "../store/cartStore";
 import { useGQL } from "../hooks/useGQL";
 import { ProductProps } from "../interface";
+import CartItemCount from "./CartItemCount";
 
 interface CartModalProps {
   open: boolean;
@@ -18,6 +19,7 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
   const cartItems = useCartStore((state) => state.cartItems);
   const removeCartItem = useCartStore((state) => state.removeItem);
   const total = cartItems.reduce((acc, item) => acc + item.price, 0);
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -79,17 +81,11 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
                     <div className="flex justify-center flex-col gap-y-2">
                       <h4 className="font-semibold">{item.title}</h4>
                       <div className="flex gap-x-2">
-                        <div className="bg-black rounded-full text-white px-2 py-[3px] flex items-center justify-center gap-[10px] ">
-                          <button className="text-sm cursor-pointer">-</button>
-                          <span className="text-sm text-center w-4">1</span>
-                          <button className="text-sm cursor-pointer">+</button>
-                        </div>
+                        <CartItemCount />
                         <button
-                          className="relative top-[2px]"
+                          className="relative top-[2px] cursor-pointer"
                           onClick={() => {
                             deleteItem(item.id.toString());
-                            console.log("id", item.id);
-                            console.log("cart after delete", cartItems);
                           }}
                         >
                           <Delete />
