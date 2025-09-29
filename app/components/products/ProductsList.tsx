@@ -16,7 +16,6 @@ const ProductsList = ({ productsArray }: ProductsDataProps) => {
         const isItemInCart = cartItems.some(
           (cartItem) => cartItem.id === item.id
         );
-        console.log({ isItemInCart });
         return (
           <div
             key={item.id}

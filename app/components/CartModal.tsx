@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Edit from "./icons/Edit";
 import Delete from "./icons/Delete";
 import { useCartStore } from "../store/cartStore";
 import { useGQL } from "../hooks/useGQL";
 import { ProductProps } from "../interface";
 import CartItemCount from "./CartItemCount";
+import toast from "react-hot-toast";
+import Loader from "./Loader";
 
 interface CartModalProps {
   open: boolean;
@@ -13,6 +14,7 @@ interface CartModalProps {
 }
 
 const CartModal = ({ open, onClose }: CartModalProps) => {
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const { DELETE_PRODUCT_BY_ID } = useGQL();
   const [handleDelete] = DELETE_PRODUCT_BY_ID();
 
@@ -34,6 +36,7 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
 
   // delete item
   const deleteItem = async (id: string) => {
+    setDeletingId(id);
     try {
       await handleDelete({
         variables: {
@@ -42,8 +45,9 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
       });
 
       removeCartItem(id);
+      toast.success("Item deleted successfully");
     } catch (error) {
-      // console.log(error);
+      toast.error("Error deleting item");
     }
   };
 
@@ -82,14 +86,23 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
                       <h4 className="font-semibold">{item.title}</h4>
                       <div className="flex gap-x-2">
                         <CartItemCount />
-                        <button
-                          className="relative top-[2px] cursor-pointer"
-                          onClick={() => {
-                            deleteItem(item.id.toString());
-                          }}
-                        >
-                          <Delete />
-                        </button>
+                        {deletingId === item.id.toString() ? (
+                          <Loader
+                            height={20}
+                            width={20}
+                            marginInline="none"
+                            marginTop={0}
+                          />
+                        ) : (
+                          <button
+                            className="relative top-[2px] cursor-pointer"
+                            onClick={() => {
+                              deleteItem(item.id.toString());
+                            }}
+                          >
+                            <Delete />
+                          </button>
+                        )}
                       </div>
                     </div>
                     <p className="font-bold text-md ml-auto">${item.price}</p>

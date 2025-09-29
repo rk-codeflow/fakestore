@@ -15,7 +15,7 @@ const Products = () => {
     }
   }, [data]);
 
-  if (loading) return <Loader />;
+  if (loading) return <Loader marginInline="auto" marginTop={20} />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
