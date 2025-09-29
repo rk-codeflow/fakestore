@@ -9,9 +9,14 @@ interface ProductsDataProps {
 
 const ProductsList = ({ productsArray }: ProductsDataProps) => {
   const addToCart = useCartStore((state) => state.addToCart);
+  const cartItems = useCartStore((state) => state.cartItems);
   return (
     <>
       {productsArray.map((item) => {
+        const isItemInCart = cartItems.some(
+          (cartItem) => cartItem.id === item.id
+        );
+        console.log({ isItemInCart });
         return (
           <div
             key={item.id}
@@ -37,13 +42,18 @@ const ProductsList = ({ productsArray }: ProductsDataProps) => {
 
               <h4 className="text-lg md:text-2xl font-bold">${item.price}</h4>
               <button
-                className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded cursor-pointer"
+                disabled={isItemInCart}
+                className={`px-4 py-2 rounded ${
+                  isItemInCart
+                    ? "bg-gray-400"
+                    : "cursor-pointer bg-pink-500 hover:bg-pink-600 text-white"
+                }`}
                 onClick={() => {
-                  addToCart(item);
+                  !isItemInCart && addToCart(item);
                   toast.success(`${item.title} added to cart!`);
                 }}
               >
-                Add to cart
+                {isItemInCart ? "Added to cart 🎉 ✅" : "Add to cart"}
               </button>
             </div>
           </div>
