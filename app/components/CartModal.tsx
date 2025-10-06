@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Delete from "./icons/Delete";
-import { useCartStore } from "../store/cartStore";
+import { CartItem, useCartStore } from "../store/cartStore";
 import { useGQL } from "../hooks/useGQL";
 import { ProductProps } from "../interface";
 import CartItemCount from "./CartItemCount";
@@ -18,9 +18,15 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
   const { DELETE_PRODUCT_BY_ID } = useGQL();
   const [handleDelete] = DELETE_PRODUCT_BY_ID();
 
+  // cart store
   const cartItems = useCartStore((state) => state.cartItems);
   const removeCartItem = useCartStore((state) => state.removeItem);
-  const total = cartItems.reduce((acc, item) => acc + item.price, 0);
+  const increaseQuantity = useCartStore((state) => state.increaseQuantity);
+  const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
+  const total = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   useEffect(() => {
     if (open) {
@@ -74,7 +80,7 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
             {cartItems.length === 0 ? (
               <p className="text-center">Your cart is empty</p>
             ) : (
-              cartItems.map((item: ProductProps) => (
+              cartItems.map((item: CartItem) => (
                 <React.Fragment key={item.id}>
                   <div className="flex gap-x-2">
                     <Image
@@ -87,7 +93,15 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
                     <div className="flex justify-center flex-col gap-y-2">
                       <h4 className="font-semibold">{item.title}</h4>
                       <div className="flex gap-x-2">
-                        <CartItemCount />
+                        <CartItemCount
+                          initialCount={item.quantity}
+                          handleIncrement={() =>
+                            increaseQuantity(item.id.toString())
+                          }
+                          handleDecrement={() =>
+                            decreaseQuantity(item.id.toString())
+                          }
+                        />
                         {deletingId === item.id.toString() ? (
                           <Loader
                             height={20}
