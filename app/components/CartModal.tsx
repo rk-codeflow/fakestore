@@ -48,6 +48,8 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
       toast.success("Item deleted successfully");
     } catch (error) {
       toast.error("Error deleting item");
+    } finally {
+      setDeletingId(null);
     }
   };
 
