@@ -40,16 +40,22 @@ export const useCartStore = create<CartItemState>()(
       },
 
       decreaseQuantity: (id) => {
-        set((state) => ({
-          cartItems: state.cartItems.map((item) =>
-            item.id.toString() === id
-              ? {
+        set((state) => {
+          const updatedCartItems = state.cartItems
+            .map((item) => {
+              if (item.id.toString() === id) {
+                return {
                   ...item,
                   quantity: item.quantity - 1,
-                }
-              : item
-          ),
-        }));
+                };
+              }
+              return item;
+            })
+            .filter((item) => item.quantity > 0);
+          return {
+            cartItems: updatedCartItems,
+          };
+        });
       },
     }),
     {
