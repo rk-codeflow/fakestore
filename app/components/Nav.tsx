@@ -1,14 +1,27 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Sun from "./icons/Sun";
 import Cart from "./icons/Cart";
 import { useCartStore } from "../store/cartStore";
+import { useDebounce } from "@/useDebounce";
+import { useSearchStore } from "../store/searchStore";
 
 interface NavProps {
   onCartClick: () => void;
 }
 const Nav = ({ onCartClick }: NavProps) => {
   const cartItems = useCartStore((state) => state.cartItems);
+  const setSearchTerm = useSearchStore((state) => state.setSearchQuery);
+  // filtering logic
+  const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearch = useDebounce(searchQuery, 500);
+
+  useEffect(() => {
+    if (debouncedSearch) {
+      setSearchTerm(debouncedSearch);
+      console.log(searchQuery);
+    }
+  }, [debouncedSearch]);
 
   return (
     <>
@@ -21,6 +34,8 @@ const Nav = ({ onCartClick }: NavProps) => {
 
         <div className="flex px-4 py-3 w-80 rounded-md border-2 text-gray-300 overflow-hidden">
           <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             type="email"
             placeholder="Search Something..."
             className="w-full outline-none bg-transparent text-gray-600 text-sm"
