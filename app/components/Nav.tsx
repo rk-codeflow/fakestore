@@ -5,6 +5,7 @@ import Cart from "./icons/Cart";
 import { useCartStore } from "../store/cartStore";
 import { useDebounce } from "@/useDebounce";
 import { useSearchStore } from "../store/searchStore";
+import { useThemeStore } from "../store/themeStore";
 
 interface NavProps {
   onCartClick: () => void;
@@ -18,14 +19,13 @@ const Nav = ({ onCartClick }: NavProps) => {
 
   useEffect(() => {
     setSearchTerm(debouncedSearch.trim());
-    console.log(searchQuery);
   }, [debouncedSearch]);
 
   return (
     <>
       <div className="flex items-center justify-between w-[95%] mx-auto mt-4">
         <a href="#">
-          <h1 className="text-sm sm:text-xl md:text-2xl lg:text-4xl font-semibold text-pink-500">
+          <h1 className="text-sm sm:text-xl md:text-2xl lg:text-4xl font-semibold text-pink-500 dark:bg-gray-900 dark:text-white">
             FakeStore
           </h1>
         </a>
