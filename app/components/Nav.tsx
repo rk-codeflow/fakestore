@@ -17,10 +17,8 @@ const Nav = ({ onCartClick }: NavProps) => {
   const debouncedSearch = useDebounce(searchQuery, 500);
 
   useEffect(() => {
-    if (debouncedSearch) {
-      setSearchTerm(debouncedSearch);
-      console.log(searchQuery);
-    }
+    setSearchTerm(debouncedSearch.trim());
+    console.log(searchQuery);
   }, [debouncedSearch]);
 
   return (

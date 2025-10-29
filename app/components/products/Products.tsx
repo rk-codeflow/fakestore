@@ -4,6 +4,7 @@ import ProductsList from "./ProductsList";
 import { useGQL } from "@/app/hooks/useGQL";
 import Loader from "../Loader";
 import { useSearchStore } from "@/app/store/searchStore";
+import { ProductProps } from "@/app/interface";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -15,8 +16,9 @@ const Products = () => {
     if (!data) return;
 
     if (searchTerm) {
-      const filteredProducts = data.products.filter((product: any) =>
-        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      const search = searchTerm.toLowerCase().trim();
+      const filteredProducts = data.products.filter((product: ProductProps) =>
+        product.title.toLowerCase().includes(search)
       );
       setProducts(filteredProducts);
     } else {
