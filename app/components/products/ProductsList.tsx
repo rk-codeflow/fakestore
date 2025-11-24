@@ -19,7 +19,7 @@ const ProductsList = ({ productsArray }: ProductsDataProps) => {
         return (
           <div
             key={item.id}
-            className="flex flex-col space-y-2  border border-gray-300 rounded-xl p-4"
+            className="flex flex-col space-y-2  border border-gray-300 rounded-xl p-4 bg-gray-100/50"
           >
             <img
               src={item?.images[0]}
