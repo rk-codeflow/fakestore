@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import Sun from "./icons/Sun";
 import Cart from "./icons/Cart";
 import { useCartStore } from "../store/cartStore";
-import { useDebounce } from "@/useDebounce";
+import { useDebounce } from "@/app/useDebounce";
 import { useSearchStore } from "../store/searchStore";
-import { useThemeStore } from "../store/themeStore";
+import Moon from "./icons/Moon";
 
 interface NavProps {
   onCartClick: () => void;
@@ -13,6 +13,7 @@ interface NavProps {
 const Nav = ({ onCartClick }: NavProps) => {
   const cartItems = useCartStore((state) => state.cartItems);
   const setSearchTerm = useSearchStore((state) => state.setSearchQuery);
+
   // filtering logic
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebounce(searchQuery, 500);
@@ -22,7 +23,7 @@ const Nav = ({ onCartClick }: NavProps) => {
   }, [debouncedSearch]);
 
   return (
-    <div className="sticky z-10 top-0 bg-white py-2.5 border-b border-gray-300">
+    <div className="sticky z-10 top-0 py-2.5 border-b border-gray-300">
       <div className="w-[95%] mx-auto">
         <div className="flex items-center justify-between">
           <a href="#">
@@ -50,9 +51,6 @@ const Nav = ({ onCartClick }: NavProps) => {
           </div>
 
           <div className="flex items-center gap-x-8">
-            <a href="#">
-              <Sun />
-            </a>
             <div
               className="cursor-pointer flex items-center"
               onClick={onCartClick}
