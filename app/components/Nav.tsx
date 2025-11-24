@@ -22,10 +22,10 @@ const Nav = ({ onCartClick }: NavProps) => {
   }, [debouncedSearch]);
 
   return (
-    <>
-      <div className="flex items-center justify-between w-[95%] mx-auto mt-4">
+    <div className="sticky z-10 top-0 bg-white py-2.5 border-b border-gray-300">
+      <div className="flex items-center justify-between w-[95%] mx-auto">
         <a href="#">
-          <h1 className="text-sm sm:text-xl md:text-2xl lg:text-4xl font-semibold text-pink-500 dark:bg-gray-900 dark:text-white">
+          <h1 className="text-sm sm:text-xl md:text-2xl lg:text-4xl font-semibold text-pink-500">
             FakeStore
           </h1>
         </a>
@@ -63,11 +63,7 @@ const Nav = ({ onCartClick }: NavProps) => {
           </div>
         </div>
       </div>
-
-      <div className="mt-3 sm:mt-5 md:mt-7">
-        <hr className="text-gray-300" />
-      </div>
-    </>
+    </div>
   );
 };
 

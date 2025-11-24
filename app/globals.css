@@ -1,7 +1,11 @@
 @import "tailwindcss";
 
-body {
-  /* max-width: 95%; */
-  /* margin: 8px; */
-  background: #f4f4f4;
+@theme {
+  --color-smoke: #f4f4f4;
 }
+
+/* @layer base {
+  body {
+    background: #f4f4f4;
+  }
+} */

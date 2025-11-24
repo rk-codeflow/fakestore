@@ -30,7 +30,7 @@ const Products = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="w-[95%] mx-auto mt-4 grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4">
+    <div className="w-[95%] mx-auto mt-4 grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4 ">
       <ProductsList productsArray={products} />
     </div>
   );
