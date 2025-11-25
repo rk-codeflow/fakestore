@@ -61,15 +61,15 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
 
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center">
+    <div className="fixed inset-0 z-40 flex items-center justify-center ">
       <div className="absolute inset-0 bg-black/20" onClick={onClose}>
         <div
-          className="mx-auto w-2/5 min-w-[40%] max-w-[500px] rounded-lg shadow-lg z-50 bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          className="mx-auto w-full sm:max-w-[500px] md:max-w-[600px] rounded-lg shadow-lg z-50 bg-smoke absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           role="dialog"
           aria-modal="true"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex items-center justify-between px-4 py-2 sticky top-0 bg-white z-10 border-b border-gray-200 shadow-2xs">
+          <div className="flex items-center justify-between px-4 py-2 sticky top-0 bg-smoke z-10 border-b border-gray-200 shadow-2xs">
             <h4 className="font-semibold text-lg">My Cart</h4>
             <p className="font-bold text-md lg:text-2xl">$ {total}</p>
           </div>
@@ -89,7 +89,9 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
                       className="w-16 h-16 object-cover"
                     />
                     <div className="flex justify-center flex-col gap-y-2">
-                      <h4 className="font-semibold">{item.title}</h4>
+                      <h4 className="text-sm sm:text-md font-semibold">
+                        {item.title}
+                      </h4>
                       <div className="flex gap-x-2">
                         <CartItemCount
                           initialCount={item.quantity}
@@ -119,7 +121,9 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
                         )}
                       </div>
                     </div>
-                    <p className="font-bold text-md ml-auto">${item.price}</p>
+                    <p className="font-bold text-sm sm:text-md ml-auto">
+                      ${item.price}
+                    </p>
                   </div>
 
                   <hr className=" border-gray-200 last:border-b-0 shadow-2xs my-2" />
@@ -140,3 +144,5 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
 };
 
 export default CartModal;
+
+// w-2/5 min-w-[40%] max-w-[500px]
