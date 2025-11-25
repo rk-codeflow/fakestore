@@ -64,19 +64,17 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
     <div className="fixed inset-0 z-40 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/20" onClick={onClose}>
         <div
-          className="mx-auto h-96 overflow-y-auto  w-2/5 min-w-[40%] max-w-[500px] rounded-lg shadow-lg z-50 bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          className="mx-auto w-2/5 min-w-[40%] max-w-[500px] rounded-lg shadow-lg z-50 bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           role="dialog"
           aria-modal="true"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex items-center justify-between px-4 py-2">
+          <div className="flex items-center justify-between px-4 py-2 sticky top-0 bg-white z-10 border-b border-gray-200 shadow-2xs">
             <h4 className="font-semibold text-lg">My Cart</h4>
             <p className="font-bold text-md lg:text-2xl">$ {total}</p>
           </div>
 
-          <hr className="border-gray-200 shadow-2xs" />
-
-          <div className="mt-4 px-4 flex flex-col">
+          <div className="mt-4 px-4 flex flex-col max-h-96 overflow-y-auto">
             {cartItems.length === 0 ? (
               <p className="text-center">Your cart is empty</p>
             ) : (
@@ -128,8 +126,10 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
                 </React.Fragment>
               ))
             )}
+          </div>
 
-            <button className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded cursor-pointer my-4">
+          <div className="px-4 py-2">
+            <button className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded cursor-pointer my-4 w-full">
               Checkout
             </button>
           </div>

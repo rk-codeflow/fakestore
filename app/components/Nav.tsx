@@ -23,7 +23,7 @@ const Nav = ({ onCartClick }: NavProps) => {
   }, [debouncedSearch]);
 
   return (
-    <div className="sticky z-10 top-0 py-2.5 border-b border-gray-300">
+    <div className="sticky bg-white z-10 top-0 py-2.5 border-b border-gray-300">
       <div className="w-[95%] mx-auto">
         <div className="flex items-center justify-between">
           <a href="#">
