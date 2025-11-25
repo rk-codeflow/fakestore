@@ -19,18 +19,19 @@ const ProductsList = ({ productsArray }: ProductsDataProps) => {
         return (
           <div
             key={item.id}
-            className="flex flex-col space-y-2  border border-gray-300 rounded-xl p-4 bg-gray-100/50"
+            className="flex flex-col space-y-1 sm:space-y-2 border border-gray-300 rounded-xl p-4 bg-gray-100/50"
           >
             <img
               src={item?.images[0]}
               alt="product"
               width={200}
               height={200}
+              loading="lazy"
               className="rounded-xl w-full hover:scale-102
              transition-all duration-300 ease-in-out"
             />
 
-            <div className="mt-8 flex flex-col justify-between h-64 space-y-2">
+            <div className="mt-8 flex flex-col justify-between h-64  sm:space-y-2">
               <div className="flex items-center justify-between">
                 <h3 className="text-md font-bold">{item.title}</h3>
                 <div className="bg-pink-500 text-white px-2 py-0.5 rounded-3xl max-w-fit item-xs">

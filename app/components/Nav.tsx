@@ -1,11 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Sun from "./icons/Sun";
 import Cart from "./icons/Cart";
 import { useCartStore } from "../store/cartStore";
 import { useDebounce } from "@/app/useDebounce";
 import { useSearchStore } from "../store/searchStore";
-import Moon from "./icons/Moon";
 
 interface NavProps {
   onCartClick: () => void;

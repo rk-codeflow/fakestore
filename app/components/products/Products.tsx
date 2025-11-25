@@ -5,6 +5,7 @@ import { useGQL } from "@/app/hooks/useGQL";
 import Loader from "../Loader";
 import { useSearchStore } from "@/app/store/searchStore";
 import { ProductProps } from "@/app/interface";
+import Footer from "../Footer";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -30,9 +31,12 @@ const Products = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="w-[95%] mx-auto mt-4 grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4 ">
-      <ProductsList productsArray={products} />
-    </div>
+    <>
+      <div className="w-[95%] mx-auto mt-4 grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4 ">
+        <ProductsList productsArray={products} />
+      </div>
+      <Footer />
+    </>
   );
 };
 
