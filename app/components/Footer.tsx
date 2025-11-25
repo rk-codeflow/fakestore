@@ -6,7 +6,11 @@ const Footer = () => {
   return (
     <footer className="border-t border-gray-200 mt-4 sm:mt-8 flex justify-between">
       <p className="my-4 flex items-center justify-center w-full gap-1.5">
-        Made with <Heart /> by
+        Made with{" "}
+        <span className="animate-pulse">
+          <Heart />
+        </span>{" "}
+        by
         <Link
           href="https://www.linkedin.com/in/raj-kiran-chaudhary-3443abbb/"
           target="_blank"
