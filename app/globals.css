@@ -3,3 +3,7 @@
 @theme {
   --color-smoke: #f4f4f4;
 }
+
+@utility paginate-btn {
+  @apply text-pink-500 disabled:text-gray-300 disabled:cursor-auto cursor-pointer flex items-center gap-x-2;
+}

@@ -32,19 +32,19 @@ const Pagination = ({
         <button
           disabled={currentPage === 1}
           onClick={() => goToPrev()}
-          className="text-pink-500 disabled:text-gray-300 flex items-center gap-x-2 cursor-pointer"
+          className="paginate-btn"
         >
-          <ArrowLongLeftIcon className="h-6 w-6 cursor-pointer" />
+          <ArrowLongLeftIcon className="h-6 w-6" />
           Prev
         </button>
 
         <button
           disabled={!hasMoreItems}
           onClick={() => goToNext()}
-          className="text-pink-500 disabled:text-gray-300 flex items-center gap-x-2 cursor-pointer"
+          className="paginate-btn"
         >
-          <ArrowLongRightIcon className="h-6 w-6 cursor-pointer text-pink-500" />
           Next
+          <ArrowLongRightIcon className="h-6 w-6" />
         </button>
       </div>
     </div>
