@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import Delete from "./icons/Delete";
 import { CartItem, useCartStore } from "../store/cartStore";
 import { useGQL } from "../hooks/useGQL";
-import { ProductProps } from "../interface";
 import CartItemCount from "./CartItemCount";
 import toast from "react-hot-toast";
 import Loader from "./Loader";
@@ -18,11 +16,12 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
   const { DELETE_PRODUCT_BY_ID } = useGQL();
   const [handleDelete] = DELETE_PRODUCT_BY_ID();
 
-  // cart store
   const cartItems = useCartStore((state) => state.cartItems);
   const removeCartItem = useCartStore((state) => state.removeItem);
+  const clearCart = useCartStore((state) => state.clearCart);
   const increaseQuantity = useCartStore((state) => state.increaseQuantity);
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
+
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -81,7 +80,7 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
               cartItems.map((item: CartItem) => (
                 <React.Fragment key={item.id}>
                   <div className="flex gap-x-2">
-                    <Image
+                    <img
                       src={item.images[0]}
                       alt={item.title}
                       width={100}
@@ -133,7 +132,11 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
           </div>
 
           <div className="px-4 py-2">
-            <button className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded cursor-pointer my-4 w-full">
+            <button
+              className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded cursor-pointer disabled:bg-pink-500/50 my-4 w-full"
+              disabled={cartItems.length === 0}
+              onClick={() => clearCart()}
+            >
               Checkout
             </button>
           </div>
@@ -144,5 +147,3 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
 };
 
 export default CartModal;
-
-// w-2/5 min-w-[40%] max-w-[500px]

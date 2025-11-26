@@ -45,7 +45,7 @@ const ProductsList = ({ productsArray }: ProductsDataProps) => {
                 disabled={isItemInCart}
                 className={`px-4 py-2 rounded ${
                   isItemInCart
-                    ? "bg-gray-400"
+                    ? "bg-pink-500/50"
                     : "cursor-pointer bg-pink-500 hover:bg-pink-600 text-white"
                 }`}
                 onClick={() => {

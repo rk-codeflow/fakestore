@@ -9,6 +9,7 @@ interface CartItemState {
   cartItems: CartItem[];
   addToCart: (item: ProductProps) => void;
   removeItem: (id: string) => void;
+  clearCart: () => void;
   increaseQuantity: (id: string) => void;
   decreaseQuantity: (id: string) => void;
 }
@@ -28,6 +29,11 @@ export const useCartStore = create<CartItemState>()(
             (item) => item.id.toString() !== id
           ),
         })),
+
+      clearCart: () =>
+        set({
+          cartItems: [],
+        }),
 
       increaseQuantity: (id) => {
         set((state) => ({
