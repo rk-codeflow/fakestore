@@ -31,6 +31,12 @@ const Products = () => {
     }
   }, [searchTerm, data]);
 
+  const hasMoreItems = products.length >= itemsPerPage;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
   if (loading) return <Loader marginInline="auto" marginTop={20} />;
   if (error) return <p>Error: {error.message}</p>;
 
@@ -39,7 +45,11 @@ const Products = () => {
       <div className="w-[95%] mx-auto mt-4 grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4 ">
         <ProductsList productsArray={products} />
       </div>
-      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        hasMoreItems={hasMoreItems}
+      />
       <Footer />
     </>
   );
