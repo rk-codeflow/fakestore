@@ -2,8 +2,14 @@ import { useMutation, useQuery } from "@apollo/client";
 import { LIST_PRODUCTS } from "../graphql";
 import { DELETE_PRODUCT } from "../graphql/mutations";
 
-const GET_ALL_PRODUCTS = () => {
-  return useQuery(LIST_PRODUCTS);
+const GET_ALL_PRODUCTS = (offset: number, limit: number) => {
+  return useQuery(LIST_PRODUCTS, {
+    variables: {
+      offset,
+      limit,
+    },
+    fetchPolicy: "cache-and-network",
+  });
 };
 
 const DELETE_PRODUCT_BY_ID = () => {

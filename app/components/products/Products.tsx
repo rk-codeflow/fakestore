@@ -6,11 +6,15 @@ import Loader from "../Loader";
 import { useSearchStore } from "@/app/store/searchStore";
 import { ProductProps } from "@/app/interface";
 import Footer from "../Footer";
+import Pagination from "../Pagination";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductProps[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+  const offset = (currentPage - 1) * itemsPerPage;
   const { GET_ALL_PRODUCTS } = useGQL();
-  const { loading, error, data } = GET_ALL_PRODUCTS();
+  const { loading, error, data } = GET_ALL_PRODUCTS(offset, itemsPerPage);
   const searchTerm = useSearchStore((state) => state.searchQuery);
 
   useEffect(() => {
@@ -35,6 +39,7 @@ const Products = () => {
       <div className="w-[95%] mx-auto mt-4 grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4 ">
         <ProductsList productsArray={products} />
       </div>
+      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
       <Footer />
     </>
   );

@@ -133,7 +133,10 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
           </div>
 
           <div className="px-4 py-2">
-            <button className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded cursor-pointer my-4 w-full">
+            <button
+              className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded cursor-pointer disabled:cursor-none my-4 w-full"
+              disabled={cartItems.length === 0}
+            >
               Checkout
             </button>
           </div>
