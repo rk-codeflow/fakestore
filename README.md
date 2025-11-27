@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🛒 React Cart Demo — With Search, Pagination, GraphQL & Zustand
 
-## Getting Started
+A small side project where I recreated a basic **add-to-cart** flow, along with **search**, **pagination**, and clean **state management** using **Zustand**.
 
-First, run the development server:
+This project helped me practice preventing prop drilling, working with GraphQL, and structuring a scalable React setup.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### ✅ Add to Cart Flow
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Add items to cart
+- Remove items from cart
+- Update cart
+- Clear cart items
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🔎 Search
 
-## Learn More
+- Real-time debounce search over product list
 
-To learn more about Next.js, take a look at the following resources:
+### 📄 Pagination
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Simple, clean pagination setup
+- Fetches only what’s needed
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🔗 GraphQL Integration
 
-## Deploy on Vercel
+- Fetch products from **Fake Store API**
+- Simple queries for products and pagination
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🧭 No Prop Drilling
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Zustand store handles global state
+- Components remain clean and focused
+
+### 🛠️ Tech Stack
+
+- React + TypeScript
+- Zustand (state management)
+- GraphQL
+- Fake Store API
+- Vite
+- Tailwind
+
+## 🖥️ Demo link
+
+Click [here](https://urfakestore.netlify.app/)
